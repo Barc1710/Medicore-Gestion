@@ -1,0 +1,63 @@
+window.GestionApp.registerAdminGroup({
+  id: "seguridad-usuarios",
+  module: "Módulo",
+  label: "Seguridad y Gestion de Usuarios",
+  screens: [
+    {
+      id: "usuarios",
+      title: "Usuarios",
+      useCase: "Gestionar usuarios",
+      actor: "Administrador",
+      objective: "Visualizar alta, edición, bloqueo y asignación de roles.",
+      metrics: [["Usuarios", "24", "Activos"], ["Bloqueados", "2", "Seguridad"], ["Nuevos", "3", "Semana"]],
+      fields: ["Nombre", "Usuario", "Correo", "Rol", "Estado"],
+      table: {
+        headers: ["Usuario", "Rol", "Último acceso", "Estado"],
+        rows: [["admin.clinica", "Administrador", "Hoy 15:42", "Activo"], ["dra.vargas", "Médico", "Hoy 14:05", "Activo"], ["caja01", "Caja", "Hoy 13:18", "Activo"]],
+      },
+      side: ["Alta", "Bloqueo visual", "Restablecer clave"],
+    },
+    {
+      id: "roles-permisos",
+      title: "Roles y permisos",
+      useCase: "Configurar accesos",
+      actor: "Administrador",
+      objective: "Mostrar permisos disponibles por rol y módulo sin aplicar seguridad real.",
+      metrics: [["Roles", "6", "Configurados"], ["Permisos", "32", "Asignados"], ["Módulos", "7", "Cubiertos"]],
+      fields: ["Rol", "Módulo", "Permiso", "Estado", "Descripción"],
+      table: {
+        headers: ["Rol", "Citas", "Farmacia", "Caja"],
+        rows: [["Administrador", "Total", "Total", "Supervisar"], ["Médico", "Agenda", "Ver receta", "Sin acceso"], ["Paciente", "Propias", "Recetas propias", "Pagos propios"]],
+      },
+      side: ["Matriz de permisos", "Restricción por rol", "Auditoría"],
+    },
+    {
+      id: "jwt-sesion",
+      title: "JWT y sesión",
+      useCase: "Visualizar token",
+      actor: "Usuario autenticado",
+      objective: "Representar header, payload, permisos, emisión y expiración del token.",
+      metrics: [["Tipo", "JWT", "Activo"], ["Expira", "2 h", "Sesión"], ["Permisos", "7", "Según rol"]],
+      fields: ["Usuario", "Rol", "Permisos", "Expiración", "Estado"],
+      table: {
+        headers: ["Claim", "Valor", "Uso", "Estado"],
+        rows: [["sub", "USR-001", "Identificador", "Visible"], ["role", "Administrador", "Autorización", "Visible"], ["exp", "2 horas", "Expiración", "Visible"]],
+      },
+      side: ["Token base64url", "Claims visibles", "Sin firma real"],
+    },
+    {
+      id: "sesiones-activas",
+      title: "Sesiones activas",
+      useCase: "Monitorear accesos",
+      actor: "Administrador",
+      objective: "Listar sesiones, dispositivo, IP referencial y actividad reciente.",
+      metrics: [["Sesiones", "11", "Activas"], ["Expiradas", "4", "Hoy"], ["Riesgo", "1", "Revisar"]],
+      fields: ["Usuario", "Dispositivo", "IP", "Inicio", "Estado"],
+      table: {
+        headers: ["Usuario", "Dispositivo", "IP", "Estado"],
+        rows: [["admin.clinica", "Chrome escritorio", "192.168.1.20", "Activa"], ["dra.vargas", "Tablet consultorio", "192.168.1.31", "Activa"], ["farmacia01", "PC farmacia", "192.168.1.44", "Expira pronto"]],
+      },
+      side: ["Cierre visual", "IP referencial", "Expiración por token"],
+    },
+  ],
+});

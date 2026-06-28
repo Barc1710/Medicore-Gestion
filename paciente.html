@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MEDICORE | Portal del Paciente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="patient-body">
+    <main id="patientLogin" class="admin-login patient-login">
+      <section class="login-hero">
+        <a class="brand" href="index.html" aria-label="Volver al sitio público">
+          <span class="brand-mark">MC</span>
+          <span>MEDICORE</span>
+        </a>
+        <div>
+          <p class="eyebrow">Portal web del paciente</p>
+          <h1>Tu atención médica en una vista simple.</h1>
+          <p class="hero-text">
+            Acceso del paciente para consultar citas, agenda, historia clínica, recetas,
+            farmacia, pagos y perfil de seguridad sin entrar al panel administrativo.
+          </p>
+        </div>
+        <div class="login-feature-grid">
+          <article>
+            <strong>6</strong>
+            <span>Secciones del paciente</span>
+          </article>
+          <article>
+            <strong>0</strong>
+            <span>Datos reales guardados</span>
+          </article>
+        </div>
+      </section>
+
+      <form id="patientLoginForm" class="admin-login-card">
+        <span class="tag">Acceso paciente</span>
+        <h2>Ingresar</h2>
+        <label>
+          Documento
+          <input id="patientDocument" type="text" value="45678123" />
+        </label>
+        <label>
+          Paciente
+          <input id="patientNameInput" type="text" value="María Salas" />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" value="paciente123" />
+        </label>
+        <button class="button primary full" type="submit">Entrar al portal</button>
+        <p class="form-note">Vista frontend. La sesión y los datos son de prueba.</p>
+      </form>
+    </main>
+
+    <section id="patientShell" class="patient-shell hidden">
+      <header class="patient-topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">MC</span>
+          <span>MEDICORE Paciente</span>
+        </a>
+        <nav id="patientNav" class="patient-nav" aria-label="Navegación del paciente"></nav>
+        <button id="patientLogout" class="ghost-button danger" type="button">Salir</button>
+      </header>
+
+      <main class="patient-main">
+        <section class="patient-welcome">
+          <div>
+            <p class="eyebrow">Sesión del paciente</p>
+            <h1 id="patientName">María Salas</h1>
+            <p>Consulta tus servicios activos y realiza acciones de prueba desde cada sección.</p>
+          </div>
+          <div class="patient-id-card">
+            <span>Documento</span>
+            <strong id="patientDoc">45678123</strong>
+            <small>Paciente activo</small>
+          </div>
+        </section>
+
+        <section id="patientContent" class="patient-content" aria-live="polite"></section>
+      </main>
+    </section>
+
+    <script src="assets/js/shared.js"></script>
+    <script src="portal-web-paciente/portal-paciente.js"></script>
+  </body>
+</html>

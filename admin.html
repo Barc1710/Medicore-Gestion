@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MEDICORE | Administrativo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="admin-body">
+    <main id="adminLogin" class="admin-login">
+      <section class="login-hero">
+        <a class="brand" href="index.html" aria-label="Volver al sitio público">
+          <span class="brand-mark">MC</span>
+          <span>MEDICORE</span>
+        </a>
+        <div>
+          <p class="eyebrow">Área administrativa</p>
+          <h1>Acceso al sistema interno.</h1>
+          <p class="hero-text">
+            Ingresa a las vistas administrativas para revisar todos los módulos, casos de uso,
+            roles, permisos y el JWT. No hay backend ni autenticación real.
+          </p>
+        </div>
+        <div class="login-feature-grid">
+          <article>
+            <strong>32</strong>
+            <span>Pantallas de casos de uso</span>
+          </article>
+          <article>
+            <strong>6</strong>
+            <span>Módulos administrativos</span>
+          </article>
+        </div>
+      </section>
+
+      <form id="adminLoginForm" class="admin-login-card">
+        <span class="tag">JWT</span>
+        <h2>Iniciar sesión</h2>
+        <label>
+          Usuario
+          <input id="loginUser" type="text" value="admin.clinica" />
+        </label>
+        <label>
+          Rol
+          <select id="loginRole">
+            <option value="Administrador">Administrador</option>
+            <option value="Médico">Médico</option>
+            <option value="Farmacia">Farmacia</option>
+            <option value="Caja">Caja</option>
+            <option value="Gerencia">Gerencia</option>
+          </select>
+        </label>
+        <label>
+          Contraseña
+          <input type="password" value="123456789" />
+        </label>
+        <button class="button primary full" type="submit">Entrar al administrativo</button>
+        <p class="form-note">Los datos son de prueba. El token y la sesión se generan en el navegador.</p>
+      </form>
+    </main>
+
+    <section id="adminShell" class="admin-shell hidden" aria-label="Panel administrativo">
+      <aside class="admin-sidebar">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">MC</span>
+          <span>MEDICORE</span>
+        </a>
+        <nav id="adminNav" class="admin-nav" aria-label="Casos de uso administrativos"></nav>
+      </aside>
+
+      <div class="admin-main">
+        <header class="admin-topbar">
+          <div>
+            <p id="currentModule" class="eyebrow">Dashboard</p>
+            <h2 id="currentTitle">Resumen operativo</h2>
+          </div>
+          <div class="admin-actions">
+            <div class="topbar-menu">
+              <button id="notificationButton" class="icon-button" type="button" aria-label="Ver notificaciones">
+                <svg class="topbar-svg" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10.27 21a2 2 0 0 0 3.46 0" />
+                  <path d="M3.26 15.33A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.67C19.41 13.85 18 12.5 18 8a6 6 0 0 0-12 0c0 4.5-1.41 5.85-2.74 7.33" />
+                </svg>
+                <span class="notification-count">3</span>
+              </button>
+              <div id="notificationMenu" class="dropdown-panel notifications-panel hidden">
+                <strong>Notificaciones</strong>
+                <article>
+                  <span>Stock crítico</span>
+                  <small>Paracetamol bajo mínimo.</small>
+                </article>
+                <article>
+                  <span>Cita pendiente</span>
+                  <small>6 pacientes por confirmar.</small>
+                </article>
+                <article>
+                  <span>Caja</span>
+                  <small>Arqueo de turno listo.</small>
+                </article>
+              </div>
+            </div>
+
+            <div class="topbar-menu">
+              <button id="profileButton" class="profile-button" type="button" aria-label="Abrir perfil">
+                <span class="profile-avatar">AD</span>
+                <strong id="topbarUser">admin.clinica</strong>
+                <span class="profile-chevron"></span>
+              </button>
+              <div id="profileMenu" class="dropdown-panel profile-panel hidden">
+                <div class="profile-menu-head">
+                  <span class="profile-avatar large">AD</span>
+                  <div>
+                    <strong id="profileMenuUser">admin.clinica</strong>
+                    <small id="profileMenuRole">Administrador</small>
+                  </div>
+                </div>
+                <button type="button" data-profile-action="perfil">Mi perfil</button>
+                <button id="openJwt" type="button">Ver JWT</button>
+                <button type="button" data-profile-action="preferencias">Preferencias</button>
+                <button id="logoutButton" class="danger" type="button">Cerrar sesión</button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section id="adminContent" class="admin-content" aria-live="polite"></section>
+      </div>
+
+      <aside id="jwtDrawer" class="jwt-drawer" aria-label="Token JWT">
+        <div class="drawer-header">
+          <div>
+            <p class="eyebrow">Seguridad</p>
+            <h3>JWT</h3>
+          </div>
+          <button id="closeJwt" class="ghost-button" type="button">Cerrar</button>
+        </div>
+        <pre id="adminJwt"></pre>
+        <div id="adminPermissions" class="permissions"></div>
+      </aside>
+    </section>
+
+    <script src="assets/js/shared.js"></script>
+    <script src="gestion-citas-agenda/citas-agenda.js"></script>
+    <script src="historia-clinica-recetas/historia-recetas.js"></script>
+    <script src="farmacia-inventario/farmacia-inventario.js"></script>
+    <script src="caja-facturacion/caja-facturacion.js"></script>
+    <script src="dashboards-reportes/dashboards-reportes.js"></script>
+    <script src="seguridad-usuarios/seguridad-usuarios.js"></script>
+    <script src="assets/js/admin.js"></script>
+  </body>
+</html>

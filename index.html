@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MEDICORE | Hitos 4 al 7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Navegación principal">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
+          <span class="brand-mark">MC</span>
+          <span>MEDICORE</span>
+        </a>
+        <div class="nav-links">
+          <a href="#hitos">Hitos</a>
+          <a href="#modulos">Módulos</a>
+          <a href="#casos">Casos de uso</a>
+          <a href="paciente.html">Paciente</a>
+          <a href="admin.html">Administrativo</a>
+        </div>
+      </nav>
+
+      <section id="inicio" class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Incrementos 3 y 4 · Solo vistas funcionales</p>
+          <h1>Sistema clínico integral para atención, farmacia, caja, reportes y seguridad.</h1>
+          <p class="hero-text">
+            Prototipo web estático que muestra los flujos principales de los hitos 4, 5, 6 y 7:
+            atención médica, farmacia e inventario, caja y facturación, dashboards y seguridad JWT.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="admin.html">Entrar al administrativo</a>
+            <a class="button secondary" href="paciente.html">Portal del paciente</a>
+          </div>
+        </div>
+
+        <div class="command-center reveal delay-1" aria-label="Resumen operativo">
+          <div class="panel-header">
+            <span class="status-dot"></span>
+            <span>Vista operativa del día</span>
+          </div>
+          <div class="metric-grid">
+            <article>
+              <strong>28</strong>
+              <span>Atenciones</span>
+            </article>
+            <article>
+              <strong>14</strong>
+              <span>Recetas</span>
+            </article>
+            <article>
+              <strong>S/ 4,820</strong>
+              <span>Caja</span>
+            </article>
+            <article>
+              <strong>6</strong>
+              <span>Alertas stock</span>
+            </article>
+          </div>
+          <div class="patient-flow">
+            <div>
+              <span>Triage</span>
+              <b>En curso</b>
+            </div>
+            <div>
+              <span>Consulta</span>
+              <b>12 min</b>
+            </div>
+            <div>
+              <span>Farmacia</span>
+              <b>Pendiente</b>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="hitos" class="section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Ruta de entrega</p>
+          <h2>Incrementos e hitos cubiertos</h2>
+          <p>
+            La página resume cada entrega como una vista frontend, sin guardar datos reales ni depender de backend.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="milestone reveal">
+            <span class="milestone-number">H4</span>
+            <h3>Módulo de Atención Médica funcional</h3>
+            <p>Flujo de consulta, cola de pacientes, triaje, historial, diagnóstico y tratamiento.</p>
+          </article>
+          <article class="milestone reveal delay-1">
+            <span class="milestone-number">H5</span>
+            <h3>Módulo de Farmacia operativo</h3>
+            <p>Dispensación de recetas, inventario, kardex visual, vencimientos y stock mínimo.</p>
+          </article>
+          <article class="milestone reveal delay-2">
+            <span class="milestone-number">H6</span>
+            <h3>Módulo Financiero y Caja funcional</h3>
+            <p>Cobros, comprobantes, facturación, arqueo, medios de pago y estados de deuda.</p>
+          </article>
+          <article class="milestone reveal delay-3">
+            <span class="milestone-number">H7</span>
+            <h3>Dashboards, reportes y seguridad completados</h3>
+            <p>Indicadores, reportes gerenciales, roles, permisos y JWT en pantalla.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="modulos" class="section modules-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Vistas principales</p>
+          <h2>Módulos funcionales en vista frontend</h2>
+          <p>Selecciona un módulo para cambiar el tablero y ver datos de ejemplo.</p>
+        </div>
+
+        <div class="module-tabs reveal" role="tablist" aria-label="Módulos del sistema">
+          <button class="tab active" type="button" data-module="medical" role="tab" aria-selected="true">
+            Atención médica
+          </button>
+          <button class="tab" type="button" data-module="pharmacy" role="tab" aria-selected="false">
+            Farmacia
+          </button>
+          <button class="tab" type="button" data-module="finance" role="tab" aria-selected="false">
+            Caja
+          </button>
+          <button class="tab" type="button" data-module="reports" role="tab" aria-selected="false">
+            Reportes
+          </button>
+        </div>
+
+        <div class="module-board reveal delay-1">
+          <aside class="module-summary">
+            <span id="moduleTag" class="tag">Hito 4</span>
+            <h3 id="moduleTitle">Atención Médica</h3>
+            <p id="moduleDescription">
+              Controla el recorrido del paciente desde admisión hasta indicaciones médicas.
+            </p>
+            <ul id="moduleHighlights" class="check-list"></ul>
+          </aside>
+
+          <div class="module-preview">
+            <div class="preview-header">
+              <div>
+                <span id="previewLabel">Cola de atención</span>
+                <strong id="previewTitle">Pacientes priorizados</strong>
+              </div>
+              <button class="ghost-button" type="button" id="refreshView">Actualizar vista</button>
+            </div>
+            <div id="moduleRows" class="data-list" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="casos" class="section cases-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Alcance funcional</p>
+          <h2>Casos de uso pertinentes</h2>
+          <p>Filtra por módulo para revisar lo que debería mostrarse en una entrega de vistas.</p>
+        </div>
+
+        <div class="case-filter reveal" aria-label="Filtro de casos de uso">
+          <button class="filter active" type="button" data-filter="all">Todos</button>
+          <button class="filter" type="button" data-filter="Atención">Atención</button>
+          <button class="filter" type="button" data-filter="Farmacia">Farmacia</button>
+          <button class="filter" type="button" data-filter="Caja">Caja</button>
+          <button class="filter" type="button" data-filter="Reportes">Reportes</button>
+          <button class="filter" type="button" data-filter="Seguridad">Seguridad</button>
+        </div>
+
+        <div id="useCaseGrid" class="use-case-grid reveal delay-1"></div>
+      </section>
+
+      <section id="seguridad" class="section security-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Acceso separado</p>
+          <h2>Administrativo con login y JWT</h2>
+          <p>
+            La web pública queda como presentación. El sistema administrativo completo está separado
+            y se abre desde una pantalla de login.
+          </p>
+        </div>
+
+        <div class="security-grid">
+          <article class="login-card reveal">
+            <span class="tag">Área interna</span>
+            <h3>Panel administrativo</h3>
+            <p>
+              Contiene las pantallas de atención médica, farmacia, inventario, caja,
+              facturación, reportes, auditoría, usuarios, roles y permisos.
+            </p>
+            <a class="button primary full" href="admin.html">Ir al login administrativo</a>
+          </article>
+
+          <article class="token-card reveal delay-1">
+            <div class="panel-header">
+              <span class="status-dot"></span>
+              <span>Separación de vistas</span>
+            </div>
+            <pre aria-live="polite">Web pública: presentación y alcance.
+Administrativo: login, sidebar, módulos y casos de uso.
+Seguridad: JWT visual, roles y permisos sin backend.</pre>
+            <div class="permissions">
+              <span class="permission">solo frontend</span>
+              <span class="permission">sin base de datos</span>
+              <span class="permission">sin autenticación real</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section patient-public-card reveal">
+        <div>
+          <p class="eyebrow">Portal web del paciente</p>
+          <h2>Citas, historia, recetas y pagos para pacientes.</h2>
+          <p>
+            Vista separada para que el paciente consulte sus próximas citas, revise recetas,
+            vea pagos pendientes y actualice sus datos personales sin acceder al administrativo.
+          </p>
+        </div>
+        <a class="button primary" href="paciente.html">Abrir portal del paciente</a>
+      </section>
+
+      <section class="section report-strip reveal">
+        <div>
+          <p class="eyebrow">Dashboard ejecutivo</p>
+          <h2>Indicadores listos para reportes</h2>
+        </div>
+        <div class="chart-card">
+          <span>Atenciones</span>
+          <div class="bar" style="--value: 82%"></div>
+        </div>
+        <div class="chart-card">
+          <span>Ventas farmacia</span>
+          <div class="bar" style="--value: 67%"></div>
+        </div>
+        <div class="chart-card">
+          <span>Recaudación</span>
+          <div class="bar" style="--value: 74%"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Prototipo frontend estático · Sin backend · Datos de prueba</p>
+    </footer>
+
+    <script src="assets/js/shared.js"></script>
+    <script src="assets/js/public.js"></script>
+  </body>
+</html>
