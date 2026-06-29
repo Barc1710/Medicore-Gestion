@@ -12,9 +12,12 @@ window.GestionApp.rolePermissions = {
     "reportes:exportar",
   ],
   Médico: ["agenda:ver", "historia:editar", "receta:emitir", "ordenes:crear", "reportes:basico"],
+  Enfermería: ["agenda:ver", "historia:triaje", "historia:signos", "historia:antecedentes", "reportes:basico"],
+  Recepción: ["citas:total", "historia:buscar", "pacientes:ver", "constancias:emitir"],
   Farmacia: ["receta:dispensar", "inventario:editar", "kardex:ver", "stock:alertas"],
   Caja: ["pagos:registrar", "comprobantes:emitir", "arqueo:crear", "deudas:ver"],
   Gerencia: ["dashboard:ver", "reportes:ver", "reportes:exportar", "auditoria:ver"],
+  "Auditor médico": ["historia:consultar", "receta:consultar", "auditoria:ver", "reportes:exportar"],
   Paciente: ["citas:propias", "historia:propia", "recetas:propias", "pagos:propios"],
 };
 
