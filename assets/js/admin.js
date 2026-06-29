@@ -138,6 +138,273 @@ function initAdminPage() {
     currentModule.textContent = `${screen.group.module} · ${screen.group.label}`;
     currentTitle.textContent = screen.title;
 
+    // Renderizar formulario especial según el apartado
+    let formHtml = "";
+    if (typeof window.CitasManager !== "undefined") {
+      const especialidades = window.CitasManager.getEspecialidades();
+      const sedes = window.CitasManager.getSedes();
+      const turnos = window.CitasManager.getTurnosDisponibles();
+      const pacientes = window.CitasManager.getPacientes();
+
+      if (screen.id === "agenda-medica") {
+        formHtml = `
+          <div class="formulario-agenda">
+            <h3>Filtrar y consultar disponibilidad</h3>
+            <form id="formFiltroAgenda">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+                <div class="form-group">
+                  <label>Especialidad:</label>
+                  <select id="especialidad" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${especialidades.map(e => `<option value="${e}">${e}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Médico:</label>
+                  <select id="medico" class="form-control" disabled>
+                    <option value="">-- Seleccionar especialidad primero --</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Sede:</label>
+                  <select id="sede" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${sedes.map(s => `<option value="${s}">${s}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Turno:</label>
+                  <select id="turno" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${turnos.map(t => `<option value="${t}">${t}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Fecha (DD/MM/YY):</label>
+                  <input type="text" id="fechaAgenda" class="form-control" placeholder="DD/MM/YY" maxlength="8" />
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 14px;">
+                <label>Observaciones/Dolencia:</label>
+                <textarea id="observaciones" class="form-control" placeholder="Describe la dolencia o motivo de la consulta"></textarea>
+              </div>
+            </form>
+          </div>
+        `;
+      } else if (screen.id === "registrar-cita") {
+        formHtml = `
+          <div class="formulario-agenda">
+            <h3>Registrar nueva cita</h3>
+            <form id="formRegistroCita">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+                <div class="form-group">
+                  <label>Documento del paciente:</label>
+                  <input type="text" id="documento" class="form-control" placeholder="Ingrese documento" />
+                </div>
+
+                <div class="form-group">
+                  <label>Paciente:</label>
+                  <select id="paciente" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${pacientes.map(p => `<option value="${p.id}">${p.nombre}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Especialidad:</label>
+                  <select id="especialidadReg" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${especialidades.map(e => `<option value="${e}">${e}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Médico:</label>
+                  <select id="medicoReg" class="form-control" disabled>
+                    <option value="">-- Seleccionar especialidad --</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Fecha (DD/MM/YY):</label>
+                  <input type="text" id="fechaReg" class="form-control" placeholder="DD/MM/YY" maxlength="8" />
+                </div>
+
+                <div class="form-group">
+                  <label>Hora:</label>
+                  <select id="horaReg" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${turnos.map(t => `<option value="${t.split(' ')[0]}">${t}</option>`).join("")}
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        `;
+      } else if (screen.id === "confirmar-cita") {
+        const citas = window.CitasManager.getCitas();
+        formHtml = `
+          <div class="formulario-agenda">
+            <h3>Confirmar asistencia</h3>
+            <form id="formConfirmacion">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+                <div class="form-group">
+                  <label>Cita:</label>
+                  <select id="citaConfirm" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${citas.map(c => `<option value="${c.id}">${c.id} - ${c.paciente_nombre}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Estado:</label>
+                  <select id="estadoConfirm" class="form-control">
+                    <option value="Confirmada">Confirmada</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Cancelada">Cancelada</option>
+                    <option value="No asistió">No asistió</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Canal:</label>
+                  <select id="canalConfirm" class="form-control">
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Teléfono">Teléfono</option>
+                    <option value="Portal">Portal</option>
+                    <option value="Presencial">Presencial</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 14px;">
+                <label>Observaciones:</label>
+                <textarea id="obsConfirm" class="form-control" placeholder="Notas adicionales"></textarea>
+              </div>
+            </form>
+          </div>
+        `;
+      } else if (screen.id === "reprogramar-cita") {
+        const citas = window.CitasManager.getCitas();
+        formHtml = `
+          <div class="formulario-agenda">
+            <h3>Reprogramar cita</h3>
+            <form id="formReprogramar">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+                <div class="form-group">
+                  <label>Cita actual:</label>
+                  <select id="citaReprog" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${citas.map(c => `<option value="${c.id}">${c.id} - ${c.paciente_nombre} (${c.fecha} ${c.hora})</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Motivo:</label>
+                  <input type="text" id="motivoReprog" class="form-control" placeholder="Motivo del cambio" />
+                </div>
+
+                <div class="form-group">
+                  <label>Nueva fecha (DD/MM/YY):</label>
+                  <input type="text" id="fechaReprog" class="form-control" placeholder="DD/MM/YY" maxlength="8" />
+                </div>
+
+                <div class="form-group">
+                  <label>Nueva hora:</label>
+                  <select id="horaReprog" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${turnos.map(t => `<option value="${t.split(' ')[0]}">${t}</option>`).join("")}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 14px;">
+                <label>Responsable del cambio:</label>
+                <input type="text" id="responsable" class="form-control" placeholder="Nombre del responsable" />
+              </div>
+            </form>
+          </div>
+        `;
+      } else if (screen.id === "lista-espera") {
+        const espera = window.CitasManager.getEspera();
+        formHtml = `
+          <div class="formulario-agenda">
+            <h3>Gestionar lista de espera</h3>
+            <form id="formEspera">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+                <div class="form-group">
+                  <label>Paciente:</label>
+                  <select id="pacienteEspera" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${pacientes.map(p => `<option value="${p.id}">${p.nombre}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Especialidad:</label>
+                  <select id="especialidadEspera" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${especialidades.map(e => `<option value="${e}">${e}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Prioridad:</label>
+                  <select id="prioridadEspera" class="form-control">
+                    <option value="Media">Media</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Baja">Baja</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Estado:</label>
+                  <select id="estadoEspera" class="form-control">
+                    <option value="Esperando">Esperando</option>
+                    <option value="Contactar">Contactar</option>
+                    <option value="Asignada">Asignada</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 14px;">
+                <label>Comentario:</label>
+                <textarea id="comentarioEspera" class="form-control" placeholder="Observaciones"></textarea>
+              </div>
+            </form>
+          </div>
+        `;
+      } else if (screen.id === "calendario-medico") {
+        const medicos = window.CitasManager.getMedicos();
+        formHtml = `
+          <div class="formulario-agenda">
+            <h3>Seleccionar médico y revisar agenda</h3>
+            <form id="formCalendario">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+                <div class="form-group">
+                  <label>Médico:</label>
+                  <select id="medicoCalendario" class="form-control">
+                    <option value="">-- Seleccionar --</option>
+                    ${medicos.map(m => `<option value="${m.id}">${m.nombre} - ${m.especialidad}</option>`).join("")}
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Consultorio:</label>
+                  <input type="text" id="consultorio" class="form-control" placeholder="Número de consultorio" />
+                </div>
+              </div>
+            </form>
+          </div>
+        `;
+      } else {
+        formHtml = `<form class="admin-form">${renderFields(screen.fields)}<label class="wide">Observaciones<textarea>Vista de prueba. No se guardan datos reales porque no existe backend.</textarea></label></form>`;
+      }
+    } else {
+      formHtml = `<form class="admin-form">${renderFields(screen.fields)}<label class="wide">Observaciones<textarea>Vista de prueba. No se guardan datos reales porque no existe backend.</textarea></label></form>`;
+    }
+
     adminContent.innerHTML = `
       <section class="screen-hero-card">
         <div>
@@ -154,13 +421,10 @@ function initAdminPage() {
       <section class="admin-workspace">
         <article class="admin-form-card">
           <div class="card-heading">
-            <div><p class="eyebrow">Formulario</p><h3>Datos del caso de uso</h3></div>
+            <div><p class="eyebrow">Formulario</p><h3>${screen.title}</h3></div>
             <button class="ghost-button" type="button" data-admin-action>Guardar</button>
           </div>
-          <form class="admin-form">
-            ${renderFields(screen.fields)}
-            <label class="wide">Observaciones<textarea>Vista de prueba. No se guardan datos reales porque no existe backend.</textarea></label>
-          </form>
+          ${formHtml}
         </article>
         <aside class="admin-side-card">
           <p class="eyebrow">Flujo</p>
@@ -180,6 +444,88 @@ function initAdminPage() {
         ${app.renderTable(screen.table)}
       </section>
     `;
+
+    // Inicializar eventos especiales
+    if (typeof window.CitasManager !== "undefined") {
+      if (screen.id === "agenda-medica") {
+        const especialidadSelect = document.getElementById("especialidad");
+        const medicoSelect = document.getElementById("medico");
+        const fechaInput = document.getElementById("fechaAgenda");
+
+        if (especialidadSelect) {
+          especialidadSelect.addEventListener("change", (e) => {
+            const especialidad = e.target.value;
+            medicoSelect.innerHTML = '<option value="">-- Seleccionar médico --</option>';
+            
+            if (especialidad) {
+              const medicos = window.CitasManager.getMedicosPorEspecialidad(especialidad);
+              medicos.forEach(m => {
+                const option = document.createElement("option");
+                option.value = m.id;
+                option.textContent = m.nombre;
+                medicoSelect.appendChild(option);
+              });
+              medicoSelect.disabled = false;
+            } else {
+              medicoSelect.disabled = true;
+            }
+          });
+        }
+
+        // Formato automático de fecha
+        if (fechaInput) {
+          fechaInput.addEventListener("input", (e) => {
+            let valor = e.target.value.replace(/\D/g, "").substring(0, 6);
+            if (valor.length >= 2) valor = valor.substring(0, 2) + "/" + valor.substring(2);
+            if (valor.length >= 5) valor = valor.substring(0, 5) + "/" + valor.substring(5);
+            e.target.value = valor;
+          });
+        }
+      } else if (screen.id === "registrar-cita") {
+        const especialidadSelect = document.getElementById("especialidadReg");
+        const medicoSelect = document.getElementById("medicoReg");
+        const fechaInput = document.getElementById("fechaReg");
+
+        if (especialidadSelect) {
+          especialidadSelect.addEventListener("change", (e) => {
+            const especialidad = e.target.value;
+            medicoSelect.innerHTML = '<option value="">-- Seleccionar médico --</option>';
+            
+            if (especialidad) {
+              const medicos = window.CitasManager.getMedicosPorEspecialidad(especialidad);
+              medicos.forEach(m => {
+                const option = document.createElement("option");
+                option.value = m.id;
+                option.textContent = m.nombre;
+                medicoSelect.appendChild(option);
+              });
+              medicoSelect.disabled = false;
+            } else {
+              medicoSelect.disabled = true;
+            }
+          });
+        }
+
+        if (fechaInput) {
+          fechaInput.addEventListener("input", (e) => {
+            let valor = e.target.value.replace(/\D/g, "").substring(0, 6);
+            if (valor.length >= 2) valor = valor.substring(0, 2) + "/" + valor.substring(2);
+            if (valor.length >= 5) valor = valor.substring(0, 5) + "/" + valor.substring(5);
+            e.target.value = valor;
+          });
+        }
+      } else if (screen.id === "reprogramar-cita") {
+        const fechaInput = document.getElementById("fechaReprog");
+        if (fechaInput) {
+          fechaInput.addEventListener("input", (e) => {
+            let valor = e.target.value.replace(/\D/g, "").substring(0, 6);
+            if (valor.length >= 2) valor = valor.substring(0, 2) + "/" + valor.substring(2);
+            if (valor.length >= 5) valor = valor.substring(0, 5) + "/" + valor.substring(5);
+            e.target.value = valor;
+          });
+        }
+      }
+    }
 
     adminContent.querySelectorAll("[data-admin-action]").forEach((button) => {
       const originalText = button.textContent;

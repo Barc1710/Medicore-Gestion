@@ -1660,3 +1660,145 @@ pre {
     transition-duration: 1ms !important;
   }
 }
+
+/* ============ FORMULARIO DE AGENDA MÉDICA ============ */
+.formulario-agenda {
+  background: rgba(255, 252, 244, 0.9);
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 14px 40px rgba(21, 42, 36, 0.08);
+  backdrop-filter: blur(20px);
+}
+
+.formulario-agenda h3 {
+  color: var(--ink);
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.formulario-agenda .form-group {
+  margin-bottom: 16px;
+}
+
+.formulario-agenda label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.94rem;
+  letter-spacing: -0.01em;
+}
+
+.formulario-agenda .form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 180ms ease;
+}
+
+.formulario-agenda .form-control:focus {
+  outline: none;
+  border-color: var(--green-dark);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 3px rgba(15, 111, 88, 0.1);
+}
+
+.formulario-agenda .form-control:disabled {
+  background: rgba(19, 32, 29, 0.08);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.formulario-agenda textarea.form-control {
+  resize: vertical;
+  min-height: 90px;
+  font-family: inherit;
+}
+
+.formulario-agenda button {
+  padding: 13px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 180ms ease;
+  margin-top: 12px;
+  letter-spacing: -0.01em;
+}
+
+.formulario-agenda .btn-primary {
+  background: var(--green-dark);
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(8, 68, 54, 0.18);
+}
+
+.formulario-agenda .btn-primary:hover {
+  background: var(--green);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(8, 68, 54, 0.24);
+}
+
+/* ============ TABLA DE RESULTADOS ============ */
+.tabla-resultados {
+  margin-top: 30px;
+}
+
+.tabla-resultados table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 252, 244, 0.85);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(21, 42, 36, 0.08);
+}
+
+.tabla-resultados th {
+  background: var(--green-dark);
+  color: #fff;
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tabla-resultados td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.tabla-resultados tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla-resultados tr:hover {
+  background: rgba(15, 111, 88, 0.05);
+}
+
+.tabla-resultados .estado-ocupado {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.tabla-resultados .estado-libre {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.tabla-resultados .estado-reservado {
+  color: var(--amber);
+  font-weight: 700;
+}
